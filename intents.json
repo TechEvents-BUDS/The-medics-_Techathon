@@ -1,0 +1,322 @@
+{
+    "intents": [
+      {
+        "tag": "greeting",
+        "patterns": ["Hi", "Hello", "Hey", "What's up", "Good morning", "Good evening"],
+        "responses": ["Hello! How can I assist you today?", "Hi there! What’s on your mind?", "Hey! How can I help you today?"]
+      },
+      {
+        "tag": "thank_you",
+        "patterns": ["Thank you", "Thanks", "I appreciate it", "Thanks a lot"],
+        "responses": ["You're welcome! Let me know if there's anything else I can help with.", "Happy to help!", "No problem at all!"]
+      },
+      {
+        "tag": "body_pain",
+        "patterns": ["I have body pain", "My body hurts", "I'm experiencing body pain"],
+        "responses": [
+          {
+            "response": "I'm sorry to hear about your body pain. Let's gather some details to help you better.",
+            "follow_up": {
+              "questions": [
+                { "question": "What is your age?", "key": "age" },
+                { "question": "What is your blood pressure (if known)?", "key": "bp" },
+                { "question": "Are you diabetic?", "key": "diabetes" }
+              ],
+              "context_set": "collecting_body_pain_data"
+            }
+          }
+        ],
+        "logic": {
+          "age_conditions": [
+            {
+              "range": [0, 2],
+              "response": "Please consult a doctor for body pain in infants."
+            },
+            {
+              "range": [3, 4],
+              "bp_check": {
+                "high": "Please consult a doctor due to high blood pressure.",
+                "low": "Please consult a doctor due to low blood pressure.",
+                "normal": {
+                  "diabetes": {
+                    "yes": "Please consult a doctor due to diabetes.",
+                    "no": "A gentle massage with a small amount of coconut or olive oil can relax muscles and reduce pain. Focus on their legs, arms, or back, depending on where the pain is. Massaging before bedtime may also help them sleep better."
+                  }
+                }
+              }
+            },
+            {
+              "range": [5, 12],
+              "bp_check": {
+                "high": "Boil 3 tablespoons of powdered nutmeg (jaiphal) in 1 cup sesame oil (til ka tel). Cool and apply on affected parts.",
+                "low": "Boil 3 tablespoons of powdered nutmeg (jaiphal) in 1 cup sesame oil (til ka tel). Cool and apply on affected parts.",
+                "normal": {
+                  "diabetes": {
+                    "yes": "Walking and swimming may help reduce back and knee pain. Arm exercises and shoulder rolls are good for calming shoulder pain. Alternate ice and heat therapy, or take a hot bath for quick relief.",
+                    "no": "Walking and swimming may help reduce back and knee pain. Arm exercises and shoulder rolls are good for calming shoulder pain. Alternate ice and heat therapy, or take a hot bath for quick relief."
+                  }
+                }
+              }
+            },
+            {
+              "range": [13, 19],
+              "bp_check": {
+                "high": "Boil 1.5 tablespoons of powdered nutmeg in 1/2 cup sesame oil. Cool and apply on affected parts.",
+                "low": "Boil 1.5 tablespoons of powdered nutmeg in 1/2 cup sesame oil. Cool and apply on affected parts.",
+                "normal": {
+                  "diabetes": {
+                    "yes": "Boil 1.5 tablespoons of powdered nutmeg in 1/2 cup sesame oil. Cool and apply on affected parts.",
+                    "no": "Boil 1.5 tablespoons of powdered nutmeg in 1/2 cup sesame oil. Cool and apply on affected parts."
+                  }
+                }
+              }
+            },
+            {
+              "range": [20, 59],
+              "bp_check": {
+                "high": "Boil 3 tablespoons of powdered nutmeg (jaiphal) in 1 cup sesame oil (til ka tel). Cool and apply on affected parts.",
+                "low": "Boil 3 tablespoons of powdered nutmeg (jaiphal) in 1 cup sesame oil (til ka tel). Cool and apply on affected parts.",
+                "normal": {
+                  "diabetes": {
+                    "yes": "Boil 3 tablespoons of powdered nutmeg (jaiphal) in 1 cup sesame oil (til ka tel). Cool and apply on affected parts.",
+                    "no": "Boil 3 tablespoons of powdered nutmeg (jaiphal) in 1 cup sesame oil (til ka tel). Cool and apply on affected parts."
+                  }
+                }
+              }
+            },
+            {
+              "range": [60, 120],
+              "bp_check": {
+                "high": "Boil 2 tablespoons of powdered nutmeg in 1 cup sesame oil. Cool and apply on affected parts.",
+                "low": "Boil 2 tablespoons of powdered nutmeg in 1 cup sesame oil. Cool and apply on affected parts.",
+                "normal": {
+                  "diabetes": {
+                    "yes": "Boil 2 tablespoons of powdered nutmeg in 1 cup sesame oil. Cool and apply on affected parts.",
+                    "no": "Boil 2 tablespoons of powdered nutmeg in 1 cup sesame oil. Cool and apply on affected parts."
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "tag": "cold_cough",
+        "patterns": ["I have a cold", "I'm sneezing", "I feel congested", "I have a runny nose", "I'm coughing"],
+        "responses": [
+          {
+            "response": "It sounds like you're dealing with a cold. Can I ask you a few questions to suggest a remedy?",
+            "follow_up": {
+              "questions": [
+                { "question": "Do you have a fever?", "key": "fever" },
+                { "question": "How long have you had these symptoms?", "key": "cold_duration" }
+              ],
+              "context_set": "collecting_cold_data"
+            }
+          }
+        ],
+        "logic": {
+          "age_conditions": [
+            {
+              "range": [0, 1],
+              "response": "Consult a doctor for cold and cough in infants."
+            },
+            {
+              "range": [2, 4],
+              "response": "Honey has natural soothing and mild antibacterial properties. Give ½ to 1 teaspoon of honey as needed to coat the throat and reduce coughing. Sit with your toddler in a steamy bathroom (run a hot shower with the door closed) for about 10–15 minutes. The steam can loosen mucus and ease coughing by keeping the airways moist."
+            },
+            {
+              "range": [5, 12],
+              "response": "Let your child breathe in water vapors from a warm bath or shower. This can help loosen mucus and, as a bonus, calm your child before bed. A teaspoon of honey can help combat coughing and soothe your child's throat. Drinking warm liquids such as caffeine-free tea, broth, or hot water with lemon can help relieve a cough by loosening mucus and soothing a sore throat."
+            },
+            {
+              "range": [13, 19],
+              "bp_check": {
+                "high": "Limit jaggery intake or replace it with a less sugary alternative.",
+                "low": "Use ginger decoction with caution to avoid lowering BP further.",
+                "normal": {
+                  "diabetes": {
+                    "yes": "Avoid jaggery, or substitute it with a diabetic-safe sweetener; ginger decoction is suitable.",
+                    "no": "1-2 gm powder of dry rhizome with jaggery twice a day in divided doses. 5 ml decoction prepared from a piece of ginger every morning prevents recurrent attacks of cold."
+                  }
+                }
+              }
+            },
+            {
+              "range": [20, 59],
+              "bp_check": {
+                "high": "Limit jaggery intake or replace it with a less sugary alternative.",
+                "low": "Use ginger decoction with caution to avoid lowering BP further.",
+                "normal": {
+                  "diabetes": {
+                    "yes": "Avoid jaggery, or substitute it with a diabetic-safe sweetener; ginger decoction is suitable.",
+                    "no": "2-5 gm powder of dry rhizome with jaggery thrice a day in divided doses. 10 ml decoction prepared from a piece of ginger every morning prevents recurrent attacks of cold."
+                  }
+                }
+              }
+            },
+            {
+              "range": [60, 120],
+              "bp_check": {
+                "high": "Limit jaggery intake or replace it with a less sugary alternative.",
+                "low": "Use ginger decoction with caution to avoid lowering BP further.",
+                "normal": {
+                  "diabetes": {
+                    "yes": "Avoid jaggery, or substitute it with a diabetic-safe sweetener; ginger decoction is suitable.",
+                    "no": "2-5 gm powder of dry rhizome with jaggery thrice a day in divided doses. 10 ml decoction prepared from a piece of ginger every morning prevents recurrent attacks of cold."
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "tag": "acidity",
+        "patterns": ["I have acidity", "My stomach burns", "I feel heartburn", "I have acid reflux"],
+        "responses": [
+          {
+            "response": "It sounds like you're experiencing acidity. Can I ask a few questions to help?",
+            "follow_up": {
+              "questions": [
+                { "question": "How frequently do you experience acidity?", "key": "frequency" },
+                { "question": "Do you consume spicy or fatty foods regularly?", "key": "diet" }
+              ],
+              "context_set": "collecting_acidity_data"
+            }
+          }
+        ]
+      },
+      {
+        "tag": "anaemia",
+        "patterns": ["I feel weak", "I'm tired all the time", "I have low hemoglobin", "I feel breathless"],
+        "responses": [
+          {
+            "response": "It seems like you might have anaemia-related symptoms. Let me ask you a few questions to assist further.",
+            "follow_up": {
+              "questions": [
+                { "question": "Have you been diagnosed with anaemia before?", "key": "diagnosed" },
+                { "question": "Are you on any supplements?", "key": "supplements" }
+              ],
+              "context_set": "collecting_anaemia_data"
+            }
+          }
+        ]
+      },
+      {
+        "tag": "stress_relief",
+        "patterns": ["I feel stressed", "I'm anxious", "I can't relax", "I'm overwhelmed"],
+        "responses": [
+          "Stress can be tough. Try some deep breathing exercises or a short walk. Let me know if you want other tips!"
+        ]
+      },
+      {
+        "tag": "chest_congestion",
+        "patterns": ["I have chest congestion", "My chest feels tight", "I can't breathe properly", "I'm wheezing"],
+        "responses": [
+          {
+            "response": "Chest congestion can be uncomfortable. Let me ask a few questions to suggest a remedy.",
+            "follow_up": {
+              "questions": [
+                { "question": "Do you also have a cough?", "key": "cough" },
+                { "question": "Do you feel feverish?", "key": "fever" }
+              ],
+              "context_set": "collecting_chest_congestion_data"
+            }
+          }
+        ]
+      },
+      {
+        "tag": "high_cholesterol",
+        "patterns": ["I have high cholesterol", "My cholesterol is high", "I need help with cholesterol"],
+        "responses": [
+          {
+            "response": "High cholesterol can be managed with the right steps. Can I ask a few questions?",
+            "follow_up": {
+              "questions": [
+                { "question": "Have you made dietary changes?", "key": "diet_changes" },
+                { "question": "Are you on any medication?", "key": "medication" }
+              ],
+              "context_set": "collecting_cholesterol_data"
+            }
+          }
+        ]
+      },
+      {
+        "tag": "fever",
+        "patterns": ["I have a fever", "I'm feeling hot", "I have a high temperature"],
+        "responses": [
+          {
+            "response": "It sounds like you have a fever. Can I ask you a few questions to suggest a remedy?",
+            "follow_up": {
+              "questions": [
+                {
+                  "question": "Do you have any other symptoms?",
+                  "key": "other_symptoms"
+                },
+                {
+                  "question": "How long have you had the fever?",
+                  "key": "fever_duration"
+                }
+              ],
+              "context_set": "collecting_fever_data"
+            }
+          }
+        ]
+      },
+      {
+        "tag": "headache",
+        "patterns": ["I have a headache", "My head hurts", "I feel pain in my head"],
+        "responses": [
+          {
+            "response": "I'm sorry to hear that. Can I ask you a few questions to suggest a remedy?",
+            "follow_up": {
+              "questions": [
+                {
+                  "question": "How long have you been experiencing this headache?",
+                  "key": "headache_duration"
+                },
+                {
+                  "question": "Is the pain mild, moderate, or severe?",
+                  "key": "headache_severity"
+                }
+              ],
+              "context_set": "collecting_headache_data"
+            }
+          }
+        ]
+      },
+      {
+        "tag": "dehydration",
+        "patterns": ["I feel dehydrated", "I'm thirsty all the time", "I have dry skin", "I feel dizzy and tired"],
+        "responses": [
+          {
+            "response": "Dehydration can be serious. Let me ask a few questions to help.",
+            "follow_up": {
+              "questions": [
+                { "question": "How much water do you drink daily?", "key": "water_intake" },
+                { "question": "Are you feeling nauseous?", "key": "nausea" }
+              ],
+              "context_set": "collecting_dehydration_data"
+            }
+          }
+        ]
+      },
+      {
+        "tag": "diabetes",
+        "patterns": ["I have diabetes", "My sugar levels are high", "I'm diabetic", "I need help with blood sugar"],
+        "responses": [
+          {
+            "response": "Managing diabetes is important. Can I ask a few questions to better assist?",
+            "follow_up": {
+              "questions": [
+                { "question": "What type of diabetes do you have (Type 1 or Type 2)?", "key": "diabetes_type" },
+                { "question": "Are you monitoring your sugar levels regularly?", "key": "sugar_monitoring" }
+              ],
+              "context_set": "collecting_diabetes_data"
+            }
+          }
+        ]
+      }
+    ]
+  }  
