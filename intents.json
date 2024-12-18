@@ -102,14 +102,15 @@
       },
       {
         "tag": "cold_cough",
-        "patterns": ["I have a cold", "I'm sneezing", "I feel congested", "I have a runny nose", "I'm coughing"],
+        "patterns": ["I have cold", "its too cold", "im freezing to death"],
         "responses": [
           {
-            "response": "It sounds like you're dealing with a cold. Can I ask you a few questions to suggest a remedy?",
+            "response": "I'm sorry to hear about your cold symptons. Let's gather some details to help you better.",
             "follow_up": {
               "questions": [
-                { "question": "Do you have a fever?", "key": "fever" },
-                { "question": "How long have you had these symptoms?", "key": "cold_duration" }
+                { "question": "What is your age?", "key": "age" },
+                { "question": "What is your blood pressure (if known)?", "key": "bp" },
+                { "question": "Are you diabetic?", "key": "diabetes" }
               ],
               "context_set": "collecting_cold_data"
             }
@@ -118,26 +119,44 @@
         "logic": {
           "age_conditions": [
             {
-              "range": [0, 1],
-              "response": "Consult a doctor for cold and cough in infants."
+              "range": [0, 2],
+              "response": "Please consult a doctor for body pain in infants."
             },
             {
-              "range": [2, 4],
-              "response": "Honey has natural soothing and mild antibacterial properties. Give ½ to 1 teaspoon of honey as needed to coat the throat and reduce coughing. Sit with your toddler in a steamy bathroom (run a hot shower with the door closed) for about 10–15 minutes. The steam can loosen mucus and ease coughing by keeping the airways moist."
+              "range": [3, 4],
+              "bp_check": {
+                "high": "Please consult a doctor due to high blood pressure.",
+                "low": "Please consult a doctor due to low blood pressure.",
+                "normal": {
+                  "diabetes": {
+                    "yes": "Please consult a doctor due to diabetes.",
+                    "no": "Honey has natural soothing and mild antibacterial properties. Give Â½ to 1 teaspoon of honey as needed to coat the throat and reduce coughing. Sit with your toddler in a steamy bathroom (run a hot shower with the door closed) for about 10â€“15 minutes. The steam can loosen mucus and ease coughing by keeping the airways moist."
+                  }
+                }
+              }
             },
             {
               "range": [5, 12],
-              "response": "Let your child breathe in water vapors from a warm bath or shower. This can help loosen mucus and, as a bonus, calm your child before bed. A teaspoon of honey can help combat coughing and soothe your child's throat. Drinking warm liquids such as caffeine-free tea, broth, or hot water with lemon can help relieve a cough by loosening mucus and soothing a sore throat."
+              "bp_check": {
+                "high": "Limit jaggery intake or replace it with a less sugary alternative, 2-5 gm powder of dry rhizome with jaggery thrice a day in divided doses. 10 ml decoction prepared from a piece of ginger every morning prevents recurrent attacks of cold.",
+                "low": "SafeUse ginger decoction with caution to avoid lowering BP further, 2-5 gm powder of dry rhizome with jaggery thrice a day in divided doses. 10 ml decoction prepared from a piece of ginger every morning prevents recurrent attacks of cold.",
+                "normal": {
+                  "diabetes": {
+                    "yes": "Walking and swimming may help reduce back and knee pain. Arm exercises and shoulder rolls are good for calming shoulder pain. Alternate ice and heat therapy, or take a hot bath for quick relief.",
+                    "no": "Let your child breathe in water vapors from a warm bath or shower. This can help loosen mucus and, as a bonus, calm your child before bed. A teaspoon of honey can help combat coughing and soothe your childs throat. Drinking warm liquids such as caffeine-free tea, broth or hot water with lemon can help relieve a cough by loosening up mucus and soothing a sore throat.."
+                  }
+                }
+              }
             },
             {
               "range": [13, 19],
               "bp_check": {
-                "high": "Limit jaggery intake or replace it with a less sugary alternative.",
-                "low": "Use ginger decoction with caution to avoid lowering BP further.",
+                "high": "working",
+                "low": "working",
                 "normal": {
                   "diabetes": {
-                    "yes": "Avoid jaggery, or substitute it with a diabetic-safe sweetener; ginger decoction is suitable.",
-                    "no": "1-2 gm powder of dry rhizome with jaggery twice a day in divided doses. 5 ml decoction prepared from a piece of ginger every morning prevents recurrent attacks of cold."
+                    "yes": "Boil 1.5 tablespoons of powdered nutmeg in 1/2 cup sesame oil. Cool and apply on affected parts.",
+                    "no": "Boil 1.5 tablespoons of powdered nutmeg in 1/2 cup sesame oil. Cool and apply on affected parts."
                   }
                 }
               }
@@ -145,12 +164,12 @@
             {
               "range": [20, 59],
               "bp_check": {
-                "high": "Limit jaggery intake or replace it with a less sugary alternative.",
-                "low": "Use ginger decoction with caution to avoid lowering BP further.",
+                "high": "Boil 3 tablespoons of powdered nutmeg (jaiphal) in 1 cup sesame oil (til ka tel). Cool and apply on affected parts.",
+                "low": "Boil 3 tablespoons of powdered nutmeg (jaiphal) in 1 cup sesame oil (til ka tel). Cool and apply on affected parts.",
                 "normal": {
                   "diabetes": {
-                    "yes": "Avoid jaggery, or substitute it with a diabetic-safe sweetener; ginger decoction is suitable.",
-                    "no": "2-5 gm powder of dry rhizome with jaggery thrice a day in divided doses. 10 ml decoction prepared from a piece of ginger every morning prevents recurrent attacks of cold."
+                    "yes": "working",
+                    "no": "Boil 3 tablespoons of powdered nutmeg (jaiphal) in 1 cup sesame oil (til ka tel). Cool and apply on affected parts."
                   }
                 }
               }
@@ -158,12 +177,12 @@
             {
               "range": [60, 120],
               "bp_check": {
-                "high": "Limit jaggery intake or replace it with a less sugary alternative.",
-                "low": "Use ginger decoction with caution to avoid lowering BP further.",
+                "high": "working",
+                "low": "working",
                 "normal": {
                   "diabetes": {
-                    "yes": "Avoid jaggery, or substitute it with a diabetic-safe sweetener; ginger decoction is suitable.",
-                    "no": "2-5 gm powder of dry rhizome with jaggery thrice a day in divided doses. 10 ml decoction prepared from a piece of ginger every morning prevents recurrent attacks of cold."
+                    "yes": "working",
+                    "no": "working"
                   }
                 }
               }
